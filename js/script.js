@@ -1,105 +1,130 @@
-/* THEME TOGGLE */
-document.getElementById("themeToggle").onclick = ()=>{
-  document.body.classList.toggle("dark");
-};
+/* =========================================================
+   MOBILE NAVBAR
+========================================================= */
 
+function toggleMenu() {
 
-/* VIDEO POPUP */
-function openVideo(src){
-  const v = document.getElementById("popupVideo");
-  v.src = src;
-  document.getElementById("videoPopup").style.display="block";
-}
-function closeVideo(){
-  const v = document.getElementById("popupVideo");
-  v.pause();
-  document.getElementById("videoPopup").style.display="none";
-}
+  const navLinks = document.getElementById("navLinks");
 
-/* CERT POPUP */
-function openCert(src){
-  document.getElementById("certImage").src = src;
-  document.getElementById("certPopup").style.display="block";
-}
-function closeCert(){
-  document.getElementById("certPopup").style.display="none";
-}
-/* ROLE ANIMATION */
-/* ===== ROLE TYPING ANIMATION ===== */
-
-const roles = [
-  "Web Developer",
-  "UI / UX Designer",
-  "Power BI Analyst",
-  "Frontend Developer"
-];
-
-let roleIndex = 0;
-let charIndex = 0;
-const roleEl = document.getElementById("role");
-
-function typeRole(){
-  if(charIndex < roles[roleIndex].length){
-    roleEl.textContent += roles[roleIndex].charAt(charIndex);
-    charIndex++;
-    setTimeout(typeRole, 90);
-  }else{
-    setTimeout(eraseRole, 1500);
+  if (navLinks) {
+    navLinks.classList.toggle("active");
   }
+
 }
 
-function eraseRole(){
-  if(charIndex > 0){
-    roleEl.textContent =
-      roles[roleIndex].substring(0, charIndex - 1);
-    charIndex--;
-    setTimeout(eraseRole, 50);
-  }else{
-    roleIndex = (roleIndex + 1) % roles.length;
-    setTimeout(typeRole, 500);
+
+/* Close mobile menu */
+
+function closeMenu() {
+
+  const navLinks = document.getElementById("navLinks");
+
+  if (navLinks) {
+    navLinks.classList.remove("active");
   }
+
 }
 
-typeRole();
-/* VIDEO POPUP */
-function closeVideo(){
-  document.getElementById("videoPopup").style.display="none";
-  document.getElementById("popupVideo").pause();
-}
-function openCert(src){
-  document.getElementById("certPopup").style.display="flex";
-  document.getElementById("certImg").src = src;
-}
 
-function closeCert(){
-  document.getElementById("certPopup").style.display="none";
-}
-/* NAVBAR MOBILE TOGGLE */
-function toggleMenu(){
-  document.getElementById("navLinks").classList.toggle("show");
-}
-themeToggle.addEventListener("click", ()=>{
-  document.body.classList.toggle("dark");
-  themeToggle.innerHTML = 
-    document.body.classList.contains("dark")
-    ? '<i class="fa-solid fa-sun"></i>'
-    : '<i class="fa-solid fa-moon"></i>';
+/* Close menu after clicking a navigation link */
+
+document.querySelectorAll("#navLinks a").forEach(link => {
+
+  link.addEventListener("click", () => {
+
+    closeMenu();
+
+  });
+
 });
-const themeToggle = document.getElementById("themeToggle");
 
-themeToggle.addEventListener("click", ()=>{
-  document.body.classList.toggle("dark");
 
-  themeToggle.innerHTML =
-    document.body.classList.contains("dark")
-    ? '<i class="fa-solid fa-sun"></i>'
-    : '<i class="fa-solid fa-moon"></i>';
+
+/* =========================================================
+   CERTIFICATE POPUP
+========================================================= */
+
+function showCertificate(imagePath) {
+
+  const popup = document.getElementById("certificatePopup");
+
+  const image = document.getElementById("certificateImage");
+
+
+  if (!popup || !image) {
+    return;
+  }
+
+
+  image.src = imagePath;
+
+  popup.style.display = "flex";
+
+  document.body.style.overflow = "hidden";
+
+}
+
+
+/* Close certificate */
+
+function hideCertificate() {
+
+  const popup = document.getElementById("certificatePopup");
+
+  const image = document.getElementById("certificateImage");
+
+
+  if (!popup || !image) {
+    return;
+  }
+
+
+  popup.style.display = "none";
+
+  image.src = "";
+
+  document.body.style.overflow = "";
+
+}
+
+
+
+/* =========================================================
+   CLOSE CERTIFICATE WHEN CLICKING OUTSIDE
+========================================================= */
+
+const certificatePopup =
+  document.getElementById("certificatePopup");
+
+
+if (certificatePopup) {
+
+  certificatePopup.addEventListener("click", function (event) {
+
+    if (event.target === certificatePopup) {
+
+      hideCertificate();
+
+    }
+
+  });
+
+}
+
+
+
+/* =========================================================
+   ESC KEY
+========================================================= */
+
+document.addEventListener("keydown", function (event) {
+
+  if (event.key === "Escape") {
+
+    hideCertificate();
+
+    closeMenu();
+
+  }
+
 });
-function toggleMenu(){
-  document.getElementById("navLinks").classList.toggle("show");
-}
-
-function closeMenu(){
-  document.getElementById("navLinks").classList.remove("show");
-}
-
