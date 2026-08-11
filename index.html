@@ -807,124 +807,125 @@
     </div>
 
 
-    <!-- ================= CONTACT ================= -->
+   
 
-    <section
-        class="section contact-section"
-        id="contact">
+           <!-- ================= CONTACT ================= -->
 
-        <div class="contact-container">
+<section class="section contact-section" id="contact">
 
+  <div class="contact-container">
 
-            <!-- MAP -->
+    <!-- MAP -->
+    <div class="contact-map">
+      <iframe
+        src="https://www.google.com/maps?q=Vembadithalam,Salem,Tamilnadu&output=embed"
+        loading="lazy">
+      </iframe>
+    </div>
 
-            <div class="contact-map">
+    <!-- CONTACT FORM -->
+    <form
+      id="contactForm"
+      class="contact-form"
+      action="https://formspree.io/f/xyegwwbz"
+      method="POST">
 
-                <iframe
-                    src="https://www.google.com/maps?q=Vembadithalam,Salem,Tamilnadu&output=embed"
-                    loading="lazy"
-                    title="Dharani Location">
-                </iframe>
+      <h2>Get In Touch</h2>
 
-            </div>
+      <div class="form-row">
 
+        <input
+          type="text"
+          name="name"
+          placeholder="Your Name"
+          required>
 
-            <!-- CONTACT FORM -->
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          required>
 
-            <form
-  class="contact-form"
-  id="contact-form"
-  action="https://formspree.io/f/xyegwwbz"
-  method="POST">
+      </div>
 
-  <h2>Get In Touch</h2>
+      <textarea
+        name="message"
+        placeholder="Message"
+        required></textarea>
 
-  <div class="form-row">
+      <input
+        type="hidden"
+        name="_subject"
+        value="New Portfolio Contact Message">
 
-    <input
-      type="text"
-      name="name"
-      placeholder="Your Name"
-      required>
+      <button
+        class="btn btn-yellow"
+        type="submit"
+        id="sendMessageBtn">
 
-    <input
-      type="email"
-      name="email"
-      placeholder="Email"
-      required>
+        <i class="fa-solid fa-paper-plane"></i>
+        Send Message
 
-  </div>
+      </button>
 
-  <textarea
-    name="message"
-    placeholder="Message"
-    required></textarea>
+      <!-- SOCIAL ICONS -->
+      <div class="social-icons">
 
-  <input
-    type="hidden"
-    name="_subject"
-    value="New Portfolio Contact Message">
+        <a
+          href="https://github.com/Dharanisrinivasan2005"
+          target="_blank"
+          rel="noopener"
+          aria-label="GitHub">
 
-  <button
-    class="btn btn-yellow"
-    type="submit"
-    id="submitButton">
+          <i class="fab fa-github"></i>
 
-    <i class="fa-solid fa-paper-plane"></i>
-    Send Message
+        </a>
 
-  </button>
+        <a
+          href="https://www.linkedin.com/in/dharani1208/"
+          target="_blank"
+          rel="noopener"
+          aria-label="LinkedIn">
 
-  <!-- Success / Error message -->
-  <div id="formMessage"></div>
+          <i class="fab fa-linkedin"></i>
 
-  <!-- SOCIAL ICONS -->
+        </a>
 
-  <div class="social-icons">
+        <a
+          href="https://wa.me/919943260551"
+          target="_blank"
+          rel="noopener"
+          aria-label="WhatsApp">
 
-    <a
-      href="https://github.com/Dharanisrinivasan2005"
-      target="_blank"
-      rel="noopener"
-      aria-label="GitHub">
+          <i class="fab fa-whatsapp"></i>
 
-      <i class="fab fa-github"></i>
+        </a>
 
-    </a>
+        <a
+          href="https://www.instagram.com/dhaaru_12/"
+          target="_blank"
+          rel="noopener"
+          aria-label="Instagram">
 
-    <a
-      href="https://www.linkedin.com/in/dharani1208/"
-      target="_blank"
-      rel="noopener"
-      aria-label="LinkedIn">
+          <i class="fab fa-instagram"></i>
 
-      <i class="fab fa-linkedin"></i>
+        </a>
 
-    </a>
+      </div>
 
-    <a
-      href="https://wa.me/919943260551"
-      target="_blank"
-      rel="noopener"
-      aria-label="WhatsApp">
-
-      <i class="fab fa-whatsapp"></i>
-
-    </a>
-
-    <a
-      href="https://www.instagram.com/dhaaru_12/"
-      target="_blank"
-      rel="noopener"
-      aria-label="Instagram">
-
-      <i class="fab fa-instagram"></i>
-
-    </a>
+    </form>
 
   </div>
 
-</form>
+</section>
+
+
+<!-- ================= SUCCESS TOAST ================= -->
+
+<div id="successToast" class="success-toast">
+  <i class="fa-solid fa-circle-check"></i>
+  <span>Message sent successfully!</span>
+</div>
 
 
     <!-- ================= JAVASCRIPT ================= -->
