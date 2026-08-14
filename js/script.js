@@ -28,16 +28,8 @@ function closeMenu() {
 
 /* Close mobile menu after clicking a navigation link */
 
-document.addEventListener("DOMContentLoaded", function () {
-
-    document.querySelectorAll("#navLinks a").forEach(link => {
-
-        link.addEventListener("click", function () {
-            closeMenu();
-        });
-
-    });
-
+document.querySelectorAll("#navLinks a").forEach(link => {
+    link.addEventListener("click", closeMenu);
 });
 
 
@@ -67,10 +59,7 @@ function openProject(card) {
     /* Project image */
 
     if (image) {
-
-        image.src =
-            card.dataset.image || "";
-
+        image.src = card.dataset.image || "";
         image.alt =
             card.dataset.title || "Project Dashboard";
     }
@@ -79,7 +68,6 @@ function openProject(card) {
     /* GitHub link */
 
     if (githubButton) {
-
         githubButton.href =
             card.dataset.github || "#";
     }
@@ -97,8 +85,8 @@ function openProject(card) {
 
 function closeProject(event) {
 
-    const popup =
-        document.getElementById("projectPopup");
+    const popup = document.getElementById("projectPopup");
+    const image = document.getElementById("projectPopupImage");
 
     if (!popup) {
         return;
@@ -106,14 +94,11 @@ function closeProject(event) {
 
 
     /*
-       If an event exists, close only when
-       clicking the dark background.
+       If the user clicks inside the popup box,
+       don't close the popup.
     */
 
-    if (
-        event &&
-        event.target !== popup
-    ) {
+    if (event && event.target !== popup) {
         return;
     }
 
@@ -121,10 +106,7 @@ function closeProject(event) {
     popup.style.display = "none";
 
 
-    /* Clear project image */
-
-    const image =
-        document.getElementById("projectPopupImage");
+    /* Clear image */
 
     if (image) {
         image.src = "";
@@ -197,51 +179,44 @@ function hideCertificate() {
 
 
 /* =========================================================
-   CLOSE POPUPS WHEN CLICKING OUTSIDE
+   CLICK OUTSIDE POPUPS TO CLOSE
 ========================================================= */
 
-document.addEventListener("DOMContentLoaded", function () {
 
-    /* Project popup */
+/* Project popup */
 
-    const projectPopup =
-        document.getElementById("projectPopup");
+const projectPopup =
+    document.getElementById("projectPopup");
 
-    if (projectPopup) {
+if (projectPopup) {
 
-        projectPopup.addEventListener(
-            "click",
-            function (event) {
+    projectPopup.addEventListener("click", function (event) {
 
-                if (event.target === projectPopup) {
-                    closeProject();
-                }
+        if (event.target === projectPopup) {
+            closeProject();
+        }
 
-            }
-        );
-    }
+    });
+
+}
 
 
-    /* Certificate popup */
+/* Certificate popup */
 
-    const certificatePopup =
-        document.getElementById("certificatePopup");
+const certificatePopup =
+    document.getElementById("certificatePopup");
 
-    if (certificatePopup) {
+if (certificatePopup) {
 
-        certificatePopup.addEventListener(
-            "click",
-            function (event) {
+    certificatePopup.addEventListener("click", function (event) {
 
-                if (event.target === certificatePopup) {
-                    hideCertificate();
-                }
+        if (event.target === certificatePopup) {
+            hideCertificate();
+        }
 
-            }
-        );
-    }
+    });
 
-});
+}
 
 
 /* =========================================================
@@ -292,143 +267,151 @@ document.addEventListener("keydown", function (event) {
    FORMSPREE CONTACT FORM
 ========================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+document.addEventListener("DOMContentLoaded", function () {
 
-        const form =
-            document.querySelector(".contact-form");
+    const form =
+        document.querySelector(".contact-form");
 
-        if (!form) {
-            return;
+
+    /* Stop if contact form doesn't exist */
+
+    if (!form) {
+        return;
+    }
+
+
+    form.addEventListener("submit", async function (event) {
+
+        /*
+           Prevent normal Formspree redirect.
+        */
+
+        event.preventDefault();
+
+
+        /* Submit button */
+
+        const submitButton =
+            form.querySelector("button[type='submit']");
+
+
+        /* Disable button while sending */
+
+        if (submitButton) {
+
+            submitButton.disabled = true;
+
+            submitButton.innerHTML = `
+                <i class="fa-solid fa-spinner fa-spin"></i>
+                Sending...
+            `;
         }
 
 
-        form.addEventListener(
-            "submit",
-            async function (event) {
+        try {
+
+            /*
+               Send form data to Formspree
+               using AJAX/fetch.
+            */
+
+            const response = await fetch(
+                form.action,
+                {
+                    method: "POST",
+
+                    body: new FormData(form),
+
+                    headers: {
+                        "Accept": "application/json"
+                    }
+                }
+            );
+
+
+            /* =================================================
+               SUCCESS
+            ================================================= */
+
+            if (response.ok) {
 
                 /*
-                   Prevent Formspree's normal redirect.
+                   Clear the form automatically.
                 */
 
-                event.preventDefault();
+                form.reset();
 
 
-                const submitButton =
-                    form.querySelector(
-                        "button[type='submit']"
-                    );
+                /*
+                   Show green success toast.
+                */
 
-
-                /* Disable button */
-
-                if (submitButton) {
-
-                    submitButton.disabled = true;
-
-                    submitButton.innerHTML = `
-                        <i class="fa-solid fa-spinner fa-spin"></i>
-                        Sending...
-                    `;
-                }
-
-
-                try {
-
-                    /*
-                       Send form data to Formspree
-                    */
-
-                    const response =
-                        await fetch(
-                            form.action,
-                            {
-                                method: "POST",
-
-                                body:
-                                    new FormData(form),
-
-                                headers: {
-                                    "Accept":
-                                        "application/json"
-                                }
-                            }
-                        );
-
-
-                    /*
-                       Check Formspree response
-                    */
-
-                    if (response.ok) {
-
-                        /*
-                           Clear form automatically
-                        */
-
-                        form.reset();
-
-
-                        /*
-                           Show success toast
-                        */
-
-                        showToast(
-                            "Message sent successfully!",
-                            "success"
-                        );
-
-                    }
-
-                    else {
-
-                        showToast(
-                            "Something went wrong. Please try again.",
-                            "error"
-                        );
-                    }
-
-                }
-
-                catch (error) {
-
-                    console.error(
-                        "Form submission error:",
-                        error
-                    );
-
-
-                    showToast(
-                        "Unable to send message. Please try again.",
-                        "error"
-                    );
-
-                }
-
-                finally {
-
-                    /*
-                       Restore Send Message button
-                    */
-
-                    if (submitButton) {
-
-                        submitButton.disabled = false;
-
-                        submitButton.innerHTML = `
-                            <i class="fa-solid fa-paper-plane"></i>
-                            Send Message
-                        `;
-                    }
-
-                }
+                showToast(
+                    "Message sent successfully!",
+                    "success"
+                );
 
             }
-        );
 
-    }
-);
+
+            /* =================================================
+               ERROR
+            ================================================= */
+
+            else {
+
+                showToast(
+                    "Something went wrong. Please try again.",
+                    "error"
+                );
+
+            }
+
+
+        }
+
+        /* =====================================================
+           NETWORK ERROR
+        ===================================================== */
+
+        catch (error) {
+
+            console.error(
+                "Form submission error:",
+                error
+            );
+
+
+            showToast(
+                "Unable to send message. Please try again.",
+                "error"
+            );
+
+        }
+
+
+        /* =====================================================
+           RESTORE BUTTON
+        ===================================================== */
+
+        finally {
+
+            if (submitButton) {
+
+                submitButton.disabled = false;
+
+                submitButton.innerHTML = `
+                    <i class="fa-solid fa-paper-plane"></i>
+                    Send Message
+                `;
+
+            }
+
+        }
+
+    });
+
+});
 
 
 /* =========================================================
@@ -441,34 +424,33 @@ function showToast(
 ) {
 
     /*
-       Remove existing toast
+       Remove an existing toast
+       before creating a new one.
     */
 
     const oldToast =
-        document.getElementById(
-            "portfolioToast"
-        );
+        document.getElementById("portfolioToast");
 
     if (oldToast) {
         oldToast.remove();
     }
 
 
-    /*
-       Create toast
-    */
+    /* Create toast */
 
     const toast =
         document.createElement("div");
 
+
     toast.id = "portfolioToast";
+
+
+    /* Message */
 
     toast.textContent = message;
 
 
-    /*
-       Add success/error class
-    */
+    /* Toast type */
 
     if (type === "success") {
 
@@ -483,41 +465,40 @@ function showToast(
         toast.classList.add(
             "toast-error"
         );
+
     }
 
 
-    /*
-       Add toast to page
-    */
+    /* Add toast to page */
 
     document.body.appendChild(toast);
 
 
     /*
-       Trigger animation
+       Trigger animation after the element
+       has been added to the DOM.
     */
 
-    requestAnimationFrame(function () {
+    requestAnimationFrame(() => {
 
-        toast.classList.add(
-            "toast-show"
-        );
+        toast.classList.add("toast-show");
 
     });
 
 
     /*
-       Remove toast after 4 seconds
+       Automatically remove toast
+       after 4 seconds.
     */
 
-    setTimeout(function () {
+    setTimeout(() => {
 
         toast.classList.remove(
             "toast-show"
         );
 
 
-        setTimeout(function () {
+        setTimeout(() => {
 
             if (toast.parentNode) {
                 toast.remove();
@@ -532,11 +513,12 @@ function showToast(
 
 /* =========================================================
    TOAST STYLES
-   Added automatically by JavaScript
+   Added automatically through JavaScript
 ========================================================= */
 
 const toastStyles =
     document.createElement("style");
+
 
 toastStyles.textContent = `
 
@@ -548,7 +530,7 @@ toastStyles.textContent = `
 
         bottom: 25px;
 
-        z-index: 9999;
+        z-index: 99999;
 
         min-width: 280px;
 
@@ -567,6 +549,8 @@ toastStyles.textContent = `
 
         font-weight: 700;
 
+        text-align: center;
+
         box-shadow:
             0 12px 30px
             rgba(0, 0, 0, 0.15);
@@ -583,6 +567,8 @@ toastStyles.textContent = `
         pointer-events: none;
     }
 
+
+    /* Toast visible */
 
     #portfolioToast.toast-show {
 
@@ -641,5 +627,8 @@ toastStyles.textContent = `
     }
 
 `;
+
+
+/* Add toast styles to page */
 
 document.head.appendChild(toastStyles);
