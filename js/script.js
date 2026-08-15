@@ -5,31 +5,44 @@
 
 
 /* =========================================================
+   YOUR GMAIL ADDRESS
+========================================================= */
+
+const YOUR_EMAIL = "dharanisrinivasan1234@gmail.com";
+
+
+/* =========================================================
    MOBILE NAVBAR
 ========================================================= */
 
 function toggleMenu() {
+
     const navLinks = document.getElementById("navLinks");
 
     if (navLinks) {
         navLinks.classList.toggle("show");
     }
+
 }
 
 
 function closeMenu() {
+
     const navLinks = document.getElementById("navLinks");
 
     if (navLinks) {
         navLinks.classList.remove("show");
     }
+
 }
 
 
 /* Close mobile menu after clicking a navigation link */
 
 document.querySelectorAll("#navLinks a").forEach(link => {
+
     link.addEventListener("click", closeMenu);
+
 });
 
 
@@ -39,37 +52,56 @@ document.querySelectorAll("#navLinks a").forEach(link => {
 
 function openProject(card) {
 
-    const popup = document.getElementById("projectPopup");
-    const title = document.getElementById("projectPopupTitle");
-    const image = document.getElementById("projectPopupImage");
-    const githubButton = document.getElementById("projectGithubBtn");
+    const popup =
+        document.getElementById("projectPopup");
+
+    const title =
+        document.getElementById("projectPopupTitle");
+
+    const image =
+        document.getElementById("projectPopupImage");
+
+    const githubButton =
+        document.getElementById("projectGithubBtn");
+
 
     if (!popup || !card) {
         return;
     }
 
+
     /* Project title */
 
     if (title) {
+
         title.textContent =
-            card.dataset.title || "Project Dashboard";
+            card.dataset.title ||
+            "Project Dashboard";
+
     }
 
 
     /* Project image */
 
     if (image) {
-        image.src = card.dataset.image || "";
+
+        image.src =
+            card.dataset.image || "";
+
         image.alt =
-            card.dataset.title || "Project Dashboard";
+            card.dataset.title ||
+            "Project Dashboard";
+
     }
 
 
     /* GitHub link */
 
     if (githubButton) {
+
         githubButton.href =
             card.dataset.github || "#";
+
     }
 
 
@@ -78,15 +110,22 @@ function openProject(card) {
     popup.style.display = "flex";
 
     document.body.classList.add("popup-open");
+
 }
 
 
-/* Close project popup */
+/* =========================================================
+   CLOSE PROJECT POPUP
+========================================================= */
 
 function closeProject(event) {
 
-    const popup = document.getElementById("projectPopup");
-    const image = document.getElementById("projectPopupImage");
+    const popup =
+        document.getElementById("projectPopup");
+
+    const image =
+        document.getElementById("projectPopupImage");
+
 
     if (!popup) {
         return;
@@ -94,11 +133,14 @@ function closeProject(event) {
 
 
     /*
-       If the user clicks inside the popup box,
-       don't close the popup.
+       Close only when clicking
+       outside the popup box.
     */
 
-    if (event && event.target !== popup) {
+    if (
+        event &&
+        event.target !== popup
+    ) {
         return;
     }
 
@@ -114,6 +156,7 @@ function closeProject(event) {
 
 
     document.body.classList.remove("popup-open");
+
 }
 
 
@@ -128,6 +171,7 @@ function showCertificate(imagePath) {
 
     const image =
         document.getElementById("certificateImage");
+
 
     if (!popup || !image) {
         return;
@@ -144,10 +188,13 @@ function showCertificate(imagePath) {
     popup.style.display = "flex";
 
     document.body.classList.add("popup-open");
+
 }
 
 
-/* Close certificate popup */
+/* =========================================================
+   CLOSE CERTIFICATE POPUP
+========================================================= */
 
 function hideCertificate() {
 
@@ -156,6 +203,7 @@ function hideCertificate() {
 
     const image =
         document.getElementById("certificateImage");
+
 
     if (!popup) {
         return;
@@ -175,46 +223,62 @@ function hideCertificate() {
 
 
     document.body.classList.remove("popup-open");
+
 }
 
 
 /* =========================================================
-   CLICK OUTSIDE POPUPS TO CLOSE
+   CLICK OUTSIDE PROJECT POPUP
 ========================================================= */
-
-
-/* Project popup */
 
 const projectPopup =
     document.getElementById("projectPopup");
 
+
 if (projectPopup) {
 
-    projectPopup.addEventListener("click", function (event) {
+    projectPopup.addEventListener(
+        "click",
+        function (event) {
 
-        if (event.target === projectPopup) {
-            closeProject();
+            if (
+                event.target === projectPopup
+            ) {
+
+                closeProject();
+
+            }
+
         }
-
-    });
+    );
 
 }
 
 
-/* Certificate popup */
+/* =========================================================
+   CLICK OUTSIDE CERTIFICATE POPUP
+========================================================= */
 
 const certificatePopup =
     document.getElementById("certificatePopup");
 
+
 if (certificatePopup) {
 
-    certificatePopup.addEventListener("click", function (event) {
+    certificatePopup.addEventListener(
+        "click",
+        function (event) {
 
-        if (event.target === certificatePopup) {
-            hideCertificate();
+            if (
+                event.target === certificatePopup
+            ) {
+
+                hideCertificate();
+
+            }
+
         }
-
-    });
+    );
 
 }
 
@@ -223,195 +287,309 @@ if (certificatePopup) {
    ESC KEY
 ========================================================= */
 
-document.addEventListener("keydown", function (event) {
+document.addEventListener(
+    "keydown",
+    function (event) {
 
-    if (event.key !== "Escape") {
-        return;
+        if (event.key !== "Escape") {
+            return;
+        }
+
+
+        /* Close project popup */
+
+        const projectPopup =
+            document.getElementById("projectPopup");
+
+
+        if (
+            projectPopup &&
+            projectPopup.style.display === "flex"
+        ) {
+
+            closeProject();
+
+        }
+
+
+        /* Close certificate popup */
+
+        const certificatePopup =
+            document.getElementById("certificatePopup");
+
+
+        if (
+            certificatePopup &&
+            certificatePopup.style.display === "flex"
+        ) {
+
+            hideCertificate();
+
+        }
+
+
+        /* Close mobile menu */
+
+        closeMenu();
+
     }
-
-
-    /* Close project popup */
-
-    const projectPopup =
-        document.getElementById("projectPopup");
-
-    if (
-        projectPopup &&
-        projectPopup.style.display === "flex"
-    ) {
-        closeProject();
-    }
-
-
-    /* Close certificate popup */
-
-    const certificatePopup =
-        document.getElementById("certificatePopup");
-
-    if (
-        certificatePopup &&
-        certificatePopup.style.display === "flex"
-    ) {
-        hideCertificate();
-    }
-
-
-    /* Close mobile menu */
-
-    closeMenu();
-
-});
+);
 
 
 /* =========================================================
-   FORMSPREE CONTACT FORM
+   GMAIL CONTACT FORM
+=========================================================
+
+   IMPORTANT:
+
+   NAME:
+   Used ONLY for the subject.
+
+   EMAIL:
+   Used ONLY for validation.
+
+   MESSAGE:
+   ONLY this value is placed inside Gmail.
+
+   Gmail body contains ONLY:
+
+   Whatever the user typed in the
+   Message field.
+
+   NOTHING ELSE.
 ========================================================= */
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
 
-    const form =
-        document.querySelector(".contact-form");
-
-
-    /* Stop if contact form doesn't exist */
-
-    if (!form) {
-        return;
-    }
+        const form =
+            document.getElementById("contactForm");
 
 
-    form.addEventListener("submit", async function (event) {
-
-        /*
-           Prevent normal Formspree redirect.
-        */
-
-        event.preventDefault();
-
-
-        /* Submit button */
-
-        const submitButton =
-            form.querySelector("button[type='submit']");
-
-
-        /* Disable button while sending */
-
-        if (submitButton) {
-
-            submitButton.disabled = true;
-
-            submitButton.innerHTML = `
-                <i class="fa-solid fa-spinner fa-spin"></i>
-                Sending...
-            `;
+        if (!form) {
+            return;
         }
 
 
-        try {
+        form.addEventListener(
+            "submit",
+            function (event) {
 
-            /*
-               Send form data to Formspree
-               using AJAX/fetch.
-            */
+                /* Stop normal form submission */
 
-            const response = await fetch(
-                form.action,
-                {
-                    method: "POST",
+                event.preventDefault();
 
-                    body: new FormData(form),
 
-                    headers: {
-                        "Accept": "application/json"
-                    }
+                /* =================================================
+                   GET FORM ELEMENTS
+                ================================================= */
+
+                const nameInput =
+                    document.getElementById("contactName");
+
+
+                const emailInput =
+                    document.getElementById("contactEmail");
+
+
+                const messageInput =
+                    document.getElementById("contactMessage");
+
+
+                const submitButton =
+                    document.getElementById("sendMessageBtn");
+
+
+                /* =================================================
+                   GET VALUES
+                ================================================= */
+
+                const name =
+                    nameInput
+                        ? nameInput.value.trim()
+                        : "";
+
+
+                const email =
+                    emailInput
+                        ? emailInput.value.trim()
+                        : "";
+
+
+                const message =
+                    messageInput
+                        ? messageInput.value.trim()
+                        : "";
+
+
+                /* =================================================
+                   VALIDATION
+                ================================================= */
+
+                if (!name) {
+
+                    showToast(
+                        "Please enter your name.",
+                        "error"
+                    );
+
+                    return;
+
                 }
-            );
 
 
-            /* =================================================
-               SUCCESS
-            ================================================= */
+                if (!email) {
 
-            if (response.ok) {
+                    showToast(
+                        "Please enter your email.",
+                        "error"
+                    );
 
-                /*
-                   Clear the form automatically.
-                */
+                    return;
 
-                form.reset();
+                }
 
 
-                /*
-                   Show green success toast.
-                */
+                if (!message) {
 
-                showToast(
-                    "Message sent successfully!",
-                    "success"
+                    showToast(
+                        "Please enter your message.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                /* =================================================
+                   SUBJECT
+                   
+                   Name is ONLY used here.
+                ================================================= */
+
+                const subject =
+                    `Portfolio Contact - ${name}`;
+
+
+                /* =================================================
+                   BODY
+                   
+                   VERY IMPORTANT:
+                   
+                   ONLY MESSAGE.
+                   
+                   No name.
+                   No email.
+                   No greeting.
+                   No footer.
+                ================================================= */
+
+                const body =
+                    message;
+
+
+                /* =================================================
+                   GMAIL COMPOSE URL
+                ================================================= */
+
+                const gmailURL =
+                    "https://mail.google.com/mail/?view=cm&fs=1" +
+                    "&to=" +
+                    encodeURIComponent(YOUR_EMAIL) +
+                    "&su=" +
+                    encodeURIComponent(subject) +
+                    "&body=" +
+                    encodeURIComponent(body);
+
+
+                /* =================================================
+                   CHANGE BUTTON
+                ================================================= */
+
+                if (submitButton) {
+
+                    submitButton.disabled = true;
+
+                    submitButton.innerHTML =
+                        '<i class="fa-solid fa-envelope"></i> ' +
+                        'Opening Gmail...';
+
+                }
+
+
+                /* =================================================
+                   OPEN GMAIL
+                ================================================= */
+
+                const gmailWindow =
+                    window.open(
+                        gmailURL,
+                        "_blank"
+                    );
+
+
+                /* =================================================
+                   SUCCESS
+                ================================================= */
+
+                if (gmailWindow) {
+
+                    showToast(
+                        "Gmail opened. Click Send to send your message.",
+                        "success"
+                    );
+
+
+                    /* Clear form */
+
+                    form.reset();
+
+                }
+
+
+                /* =================================================
+                   POPUP BLOCKED
+                ================================================= */
+
+                else {
+
+                    showToast(
+                        "Please allow popups to open Gmail.",
+                        "error"
+                    );
+
+                }
+
+
+                /* =================================================
+                   RESTORE BUTTON
+                ================================================= */
+
+                setTimeout(
+                    function () {
+
+                        if (submitButton) {
+
+                            submitButton.disabled =
+                                false;
+
+                            submitButton.innerHTML =
+                                '<i class="fa-solid fa-paper-plane"></i> ' +
+                                'Send Message';
+
+                        }
+
+                    },
+                    1000
                 );
 
             }
+        );
 
-
-            /* =================================================
-               ERROR
-            ================================================= */
-
-            else {
-
-                showToast(
-                    "Something went wrong. Please try again.",
-                    "error"
-                );
-
-            }
-
-
-        }
-
-        /* =====================================================
-           NETWORK ERROR
-        ===================================================== */
-
-        catch (error) {
-
-            console.error(
-                "Form submission error:",
-                error
-            );
-
-
-            showToast(
-                "Unable to send message. Please try again.",
-                "error"
-            );
-
-        }
-
-
-        /* =====================================================
-           RESTORE BUTTON
-        ===================================================== */
-
-        finally {
-
-            if (submitButton) {
-
-                submitButton.disabled = false;
-
-                submitButton.innerHTML = `
-                    <i class="fa-solid fa-paper-plane"></i>
-                    Send Message
-                `;
-
-            }
-
-        }
-
-    });
-
-});
+    }
+);
 
 
 /* =========================================================
@@ -423,13 +601,13 @@ function showToast(
     type = "success"
 ) {
 
-    /*
-       Remove an existing toast
-       before creating a new one.
-    */
+    /* Remove old toast */
 
     const oldToast =
-        document.getElementById("portfolioToast");
+        document.getElementById(
+            "portfolioToast"
+        );
+
 
     if (oldToast) {
         oldToast.remove();
@@ -442,12 +620,14 @@ function showToast(
         document.createElement("div");
 
 
-    toast.id = "portfolioToast";
+    toast.id =
+        "portfolioToast";
 
 
     /* Message */
 
-    toast.textContent = message;
+    toast.textContent =
+        message;
 
 
     /* Toast type */
@@ -469,51 +649,56 @@ function showToast(
     }
 
 
-    /* Add toast to page */
+    /* Add to page */
 
     document.body.appendChild(toast);
 
 
-    /*
-       Trigger animation after the element
-       has been added to the DOM.
-    */
+    /* Start animation */
 
-    requestAnimationFrame(() => {
+    requestAnimationFrame(
+        function () {
 
-        toast.classList.add("toast-show");
+            toast.classList.add(
+                "toast-show"
+            );
 
-    });
-
-
-    /*
-       Automatically remove toast
-       after 4 seconds.
-    */
-
-    setTimeout(() => {
-
-        toast.classList.remove(
-            "toast-show"
-        );
+        }
+    );
 
 
-        setTimeout(() => {
+    /* Remove after 4 seconds */
 
-            if (toast.parentNode) {
-                toast.remove();
-            }
+    setTimeout(
+        function () {
 
-        }, 400);
+            toast.classList.remove(
+                "toast-show"
+            );
 
-    }, 4000);
+
+            setTimeout(
+                function () {
+
+                    if (toast.parentNode) {
+
+                        toast.remove();
+
+                    }
+
+                },
+                400
+            );
+
+        },
+        4000
+    );
 
 }
 
 
 /* =========================================================
    TOAST STYLES
-   Added automatically through JavaScript
 ========================================================= */
 
 const toastStyles =
@@ -565,10 +750,9 @@ toastStyles.textContent = `
             transform 0.35s ease;
 
         pointer-events: none;
+
     }
 
-
-    /* Toast visible */
 
     #portfolioToast.toast-show {
 
@@ -576,10 +760,9 @@ toastStyles.textContent = `
 
         transform:
             translateY(0);
+
     }
 
-
-    /* SUCCESS */
 
     #portfolioToast.toast-success {
 
@@ -589,10 +772,9 @@ toastStyles.textContent = `
 
         border:
             1px solid #b7dfc0;
+
     }
 
-
-    /* ERROR */
 
     #portfolioToast.toast-error {
 
@@ -602,10 +784,9 @@ toastStyles.textContent = `
 
         border:
             1px solid #f1b8bd;
+
     }
 
-
-    /* MOBILE */
 
     @media (max-width: 500px) {
 
@@ -622,6 +803,7 @@ toastStyles.textContent = `
             max-width: none;
 
             text-align: center;
+
         }
 
     }
@@ -629,6 +811,8 @@ toastStyles.textContent = `
 `;
 
 
-/* Add toast styles to page */
+/* Add toast styles */
 
-document.head.appendChild(toastStyles);
+document.head.appendChild(
+    toastStyles
+);

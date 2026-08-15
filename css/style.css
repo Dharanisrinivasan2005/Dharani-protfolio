@@ -3,6 +3,7 @@
    LIGHT LAVENDER THEME
 ========================================================= */
 
+
 /* =========================================================
    RESET
 ========================================================= */
@@ -36,6 +37,7 @@ html {
     --shadow: 0 12px 35px rgba(91, 62, 125, 0.10);
 }
 
+
 /* =========================================================
    BODY
 ========================================================= */
@@ -62,19 +64,30 @@ body {
     overflow-x: hidden;
 }
 
+body.popup-open {
+    overflow: hidden;
+}
+
 a {
     text-decoration: none;
     color: inherit;
 }
 
 button,
-a {
+a,
+input,
+textarea {
     transition: 0.3s ease;
+}
+
+img {
+    max-width: 100%;
 }
 
 section {
     scroll-margin-top: 90px;
 }
+
 
 /* =========================================================
    NAVBAR
@@ -107,15 +120,24 @@ section {
     justify-content: space-between;
 }
 
-/* LOGO */
+
+/* =========================================================
+   LOGO
+========================================================= */
 
 .logo {
     font-size: 27px;
     font-weight: 800;
+
     color: var(--purple-dark);
+
+    letter-spacing: -0.5px;
 }
 
-/* NAV LINKS */
+
+/* =========================================================
+   NAV LINKS
+========================================================= */
 
 .nav-links {
     list-style: none;
@@ -139,6 +161,7 @@ section {
     content: "";
 
     position: absolute;
+
     left: 0;
     bottom: -7px;
 
@@ -160,7 +183,10 @@ section {
     width: 100%;
 }
 
-/* CONTACT NAV BUTTON */
+
+/* =========================================================
+   CONTACT NAV BUTTON
+========================================================= */
 
 .nav-links .nav-btn {
     padding: 10px 20px;
@@ -168,9 +194,11 @@ section {
     border-radius: 25px;
 
     background: var(--purple);
+
     color: white;
 
-    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.20);
+    box-shadow:
+        0 8px 20px rgba(139, 92, 246, 0.20);
 }
 
 .nav-links .nav-btn::after {
@@ -179,10 +207,16 @@ section {
 
 .nav-links .nav-btn:hover {
     background: var(--purple-dark);
+
+    color: white;
+
     transform: translateY(-2px);
 }
 
-/* MOBILE MENU */
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
 
 .menu-icon {
     display: none;
@@ -194,6 +228,11 @@ section {
     cursor: pointer;
 }
 
+.menu-icon:hover {
+    color: var(--purple);
+}
+
+
 /* =========================================================
    GENERAL SECTION
 ========================================================= */
@@ -202,6 +241,7 @@ section {
     max-width: 1150px;
 
     margin: auto;
+
     padding: 90px 25px;
 }
 
@@ -234,14 +274,16 @@ section {
     background: var(--purple);
 }
 
+
 /* =========================================================
-   HERO
+   HERO SECTION
 ========================================================= */
 
 .header {
     min-height: 88vh;
 
     display: flex;
+
     flex-direction: column;
 
     align-items: center;
@@ -252,7 +294,10 @@ section {
     padding-top: 110px;
 }
 
-/* PROFILE */
+
+/* =========================================================
+   PROFILE IMAGE
+========================================================= */
 
 .profile {
     width: 175px;
@@ -273,9 +318,22 @@ section {
     box-shadow:
         0 0 0 8px var(--purple-light),
         0 15px 35px rgba(139, 92, 246, 0.18);
+
+    transition: 0.4s ease;
 }
 
-/* NAME */
+.profile:hover {
+    transform: translateY(-5px) scale(1.03);
+
+    box-shadow:
+        0 0 0 8px #ddd6fe,
+        0 20px 45px rgba(139, 92, 246, 0.25);
+}
+
+
+/* =========================================================
+   HERO NAME
+========================================================= */
 
 .hero-name {
     font-size: clamp(42px, 7vw, 70px);
@@ -283,9 +341,16 @@ section {
     font-weight: 800;
 
     color: var(--purple-dark);
+
+    line-height: 1.1;
+
+    margin-bottom: 8px;
 }
 
-/* TITLE */
+
+/* =========================================================
+   HERO TITLE
+========================================================= */
 
 .header h1:not(.hero-name) {
     font-size: clamp(23px, 4vw, 35px);
@@ -305,7 +370,10 @@ section {
     margin-bottom: 25px;
 }
 
-/* HERO BUTTONS */
+
+/* =========================================================
+   HERO BUTTONS
+========================================================= */
 
 .hero-buttons {
     display: flex;
@@ -317,6 +385,7 @@ section {
 
     flex-wrap: wrap;
 }
+
 
 /* =========================================================
    BUTTONS
@@ -341,9 +410,18 @@ section {
     cursor: pointer;
 
     border: 1px solid transparent;
+
+    text-align: center;
 }
 
-/* PRIMARY BUTTON */
+.btn:active {
+    transform: scale(0.97);
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+========================================================= */
 
 .btn-yellow {
     background: var(--purple);
@@ -357,13 +435,18 @@ section {
 .btn-yellow:hover {
     background: var(--purple-dark);
 
+    color: white;
+
     transform: translateY(-3px);
 
     box-shadow:
         0 15px 30px rgba(139, 92, 246, 0.28);
 }
 
-/* OUTLINE BUTTON */
+
+/* =========================================================
+   OUTLINE BUTTON
+========================================================= */
 
 .btn-outline {
     border: 1px solid var(--purple);
@@ -380,6 +463,7 @@ section {
 
     transform: translateY(-3px);
 }
+
 
 /* =========================================================
    ABOUT
@@ -402,6 +486,7 @@ section {
 .about-section strong {
     color: var(--purple-dark);
 }
+
 
 /* =========================================================
    SKILLS
@@ -468,10 +553,14 @@ section {
     margin-bottom: 18px;
 }
 
-/* PROGRESS BAR */
+
+/* =========================================================
+   PROGRESS BAR
+========================================================= */
 
 .progress {
     width: 100%;
+
     height: 7px;
 
     border-radius: 20px;
@@ -488,8 +577,14 @@ section {
 
     border-radius: inherit;
 
-    background: var(--purple);
+    background:
+        linear-gradient(
+            90deg,
+            var(--purple),
+            #a78bfa
+        );
 }
+
 
 /* =========================================================
    EDUCATION
@@ -562,6 +657,16 @@ section {
     margin-top: 18px;
 }
 
+
+/* =========================================================
+   INTERNSHIP BUTTON
+========================================================= */
+
+.edu-card .btn {
+    margin-top: 20px;
+}
+
+
 /* =========================================================
    PROJECTS
 ========================================================= */
@@ -578,7 +683,10 @@ section {
     gap: 28px;
 }
 
-/* PROJECT CARD */
+
+/* =========================================================
+   PROJECT CARD
+========================================================= */
 
 .project-card {
     background: rgba(255, 255, 255, 0.95);
@@ -605,10 +713,14 @@ section {
         0 20px 45px rgba(91, 62, 125, 0.18);
 }
 
-/* PROJECT IMAGE */
+
+/* =========================================================
+   PROJECT IMAGE
+========================================================= */
 
 .project-image {
     width: 100%;
+
     height: 230px;
 
     overflow: hidden;
@@ -623,6 +735,7 @@ section {
 
 .project-image img {
     width: 100%;
+
     height: 100%;
 
     display: block;
@@ -636,7 +749,10 @@ section {
     transform: scale(1.04);
 }
 
-/* PROJECT CONTENT */
+
+/* =========================================================
+   PROJECT CONTENT
+========================================================= */
 
 .project-content {
     padding: 25px;
@@ -678,7 +794,10 @@ section {
     margin-bottom: 18px;
 }
 
-/* PROJECT TOOLS */
+
+/* =========================================================
+   PROJECT TOOLS
+========================================================= */
 
 .project-tools {
     display: flex;
@@ -704,7 +823,10 @@ section {
     font-weight: 700;
 }
 
-/* PROJECT HINT */
+
+/* =========================================================
+   PROJECT HINT
+========================================================= */
 
 .project-hint {
     display: inline-flex;
@@ -719,6 +841,7 @@ section {
 
     font-weight: 700;
 }
+
 
 /* =========================================================
    PROJECT POPUP
@@ -742,10 +865,6 @@ section {
 
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-}
-
-body.popup-open {
-    overflow: hidden;
 }
 
 .project-popup-box {
@@ -779,6 +898,11 @@ body.popup-open {
     margin: 0 45px 16px;
 }
 
+
+/* =========================================================
+   PROJECT POPUP IMAGE
+========================================================= */
+
 .project-popup-image-wrap {
     width: 100%;
 
@@ -806,6 +930,11 @@ body.popup-open {
 
     margin: auto;
 }
+
+
+/* =========================================================
+   CLOSE PROJECT
+========================================================= */
 
 .close-project {
     position: absolute;
@@ -839,6 +968,11 @@ body.popup-open {
     transform: rotate(90deg);
 }
 
+
+/* =========================================================
+   GITHUB BUTTON
+========================================================= */
+
 .project-github-btn {
     display: inline-flex;
 
@@ -870,6 +1004,7 @@ body.popup-open {
 
     transform: translateY(-3px);
 }
+
 
 /* =========================================================
    CERTIFICATES
@@ -944,6 +1079,7 @@ body.popup-open {
     font-weight: 600;
 }
 
+
 /* =========================================================
    CERTIFICATE POPUP
 ========================================================= */
@@ -965,6 +1101,8 @@ body.popup-open {
     background: rgba(38, 25, 55, 0.75);
 
     backdrop-filter: blur(10px);
+
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .certificate-box {
@@ -998,7 +1136,10 @@ body.popup-open {
     border-radius: 8px;
 }
 
-/* CLOSE CERTIFICATE */
+
+/* =========================================================
+   CLOSE CERTIFICATE
+========================================================= */
 
 .close-certificate {
     position: absolute;
@@ -1038,6 +1179,7 @@ body.popup-open {
     transform: rotate(90deg);
 }
 
+
 /* =========================================================
    CONTACT
 ========================================================= */
@@ -1067,7 +1209,14 @@ body.popup-open {
     box-shadow: var(--shadow);
 }
 
-/* MAP */
+
+/* =========================================================
+   MAP
+========================================================= */
+
+.contact-map {
+    min-height: 400px;
+}
 
 .contact-map iframe {
     width: 100%;
@@ -1079,7 +1228,10 @@ body.popup-open {
     border: 0;
 }
 
-/* CONTACT FORM */
+
+/* =========================================================
+   CONTACT FORM
+========================================================= */
 
 .contact-form {
     padding: 30px;
@@ -1095,6 +1247,11 @@ body.popup-open {
     margin-left: 0;
 }
 
+
+/* =========================================================
+   FORM ROW
+========================================================= */
+
 .form-row {
     display: grid;
 
@@ -1102,6 +1259,11 @@ body.popup-open {
 
     gap: 15px;
 }
+
+
+/* =========================================================
+   FORM INPUTS
+========================================================= */
 
 .contact-form input,
 .contact-form textarea {
@@ -1123,6 +1285,8 @@ body.popup-open {
 
     font-family: inherit;
 
+    font-size: 15px;
+
     transition: 0.3s ease;
 }
 
@@ -1138,6 +1302,8 @@ body.popup-open {
 
     box-shadow:
         0 0 0 3px rgba(139, 92, 246, 0.08);
+
+    background: white;
 }
 
 .contact-form input::placeholder,
@@ -1148,6 +1314,7 @@ body.popup-open {
 .contact-form .btn {
     border: none;
 }
+
 
 /* =========================================================
    SOCIAL ICONS
@@ -1191,15 +1358,10 @@ body.popup-open {
     border-color: var(--purple);
 }
 
-/* =========================================================
-   FORM SUCCESS / ERROR TOAST
-========================================================= */
 
-/*
-   IMPORTANT:
-   This makes the message appear as a small popup
-   in the bottom-right corner.
-*/
+/* =========================================================
+   FORM SUCCESS / ERROR MESSAGE
+========================================================= */
 
 #formMessage {
     position: fixed;
@@ -1217,6 +1379,7 @@ body.popup-open {
     border-radius: 12px;
 
     font-size: 14px;
+
     font-weight: 600;
 
     box-shadow:
@@ -1227,7 +1390,10 @@ body.popup-open {
     animation: toastSlideIn 0.35s ease;
 }
 
-/* SUCCESS */
+
+/* =========================================================
+   SUCCESS
+========================================================= */
 
 .form-success {
     display: block !important;
@@ -1239,7 +1405,10 @@ body.popup-open {
     border: 1px solid #b7dfc0;
 }
 
-/* ERROR */
+
+/* =========================================================
+   ERROR
+========================================================= */
 
 .form-error {
     display: block !important;
@@ -1251,27 +1420,38 @@ body.popup-open {
     border: 1px solid #f1bfc4;
 }
 
-/* TOAST ANIMATION */
+
+/* =========================================================
+   TOAST ANIMATION
+========================================================= */
 
 @keyframes toastSlideIn {
+
     from {
         opacity: 0;
+
         transform: translateY(20px);
     }
 
     to {
         opacity: 1;
+
         transform: translateY(0);
     }
+
 }
 
-/* SUBMIT BUTTON */
+
+/* =========================================================
+   SUBMIT BUTTON
+========================================================= */
 
 #submitButton:disabled {
     opacity: 0.7;
 
     cursor: wait;
 }
+
 
 /* =========================================================
    TABLET
@@ -1298,13 +1478,17 @@ body.popup-open {
     .projects-grid {
         grid-template-columns: 1fr;
     }
+
 }
+
 
 /* =========================================================
    MOBILE
 ========================================================= */
 
 @media (max-width: 700px) {
+
+    /* NAVBAR */
 
     .nav-container {
         min-height: 68px;
@@ -1334,6 +1518,8 @@ body.popup-open {
 
         backdrop-filter: blur(18px);
 
+        -webkit-backdrop-filter: blur(18px);
+
         border-bottom: 1px solid var(--border);
     }
 
@@ -1361,6 +1547,7 @@ body.popup-open {
         display: block;
     }
 
+
     /* HERO */
 
     .header {
@@ -1371,8 +1558,10 @@ body.popup-open {
 
     .profile {
         width: 145px;
+
         height: 145px;
     }
+
 
     /* SKILLS */
 
@@ -1380,11 +1569,13 @@ body.popup-open {
         grid-template-columns: 1fr;
     }
 
+
     /* CERTIFICATES */
 
     .cert-container {
         grid-template-columns: 1fr;
     }
+
 
     /* PROJECTS */
 
@@ -1400,17 +1591,29 @@ body.popup-open {
         padding: 22px;
     }
 
+
     /* CONTACT */
 
     .form-row {
         grid-template-columns: 1fr;
     }
 
+    .contact-form {
+        padding: 22px;
+    }
+
+
     /* SECTIONS */
 
     .section {
         padding: 70px 18px;
     }
+
+    .section h2,
+    .section-container h2 {
+        font-size: 29px;
+    }
+
 
     /* CERTIFICATE POPUP */
 
@@ -1420,13 +1623,16 @@ body.popup-open {
 
     .close-certificate {
         top: -14px;
+
         right: -8px;
 
         width: 38px;
+
         height: 38px;
 
         font-size: 23px;
     }
+
 
     /* PROJECT POPUP */
 
@@ -1451,20 +1657,25 @@ body.popup-open {
         max-height: 60vh;
     }
 
+
     /* TOAST */
 
     #formMessage {
         right: 15px;
+
         bottom: 15px;
 
         left: 15px;
 
         min-width: auto;
+
         max-width: none;
 
         text-align: center;
     }
+
 }
+
 
 /* =========================================================
    SMALL MOBILE
@@ -1478,6 +1689,10 @@ body.popup-open {
 
     .header h1:not(.hero-name) {
         font-size: 23px;
+    }
+
+    .hero-name {
+        font-size: 42px;
     }
 
     .hero-buttons {
@@ -1499,4 +1714,44 @@ body.popup-open {
     .project-image {
         height: 180px;
     }
+
+    .contact-map iframe {
+        min-height: 320px;
+    }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid rgba(139, 92, 246, 0.35);
+
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        transition-duration: 0.01ms !important;
+    }
+
 }
